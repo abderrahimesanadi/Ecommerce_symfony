@@ -2,47 +2,36 @@
 
 namespace App\Controller;
 
-use App\Repository\ProductRepository;
+use App\Services\Cart\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CartController extends AbstractController
 {
     /**
      * @Route("/panier", name="cart_index")
      */
-    public function index(SessionInterface $session,ProductRepository $repo)
+    public function index(CartService $cartService)
     {
-        $panier=$session->get('panier',[]);
-        dd($panier);
-        $panierwithData = [];
-        foreach($panier as $p =>$q){
-            if(!is_null($repo->find($p))){
-                $panierwithData[] = [
-                    "pr" => $repo->find($p),
-                    "qantity" => $q
-                   ];
-            }
-        }
-        $session->set('panier',$panierwithData);  
-
-        return $this->render('cart/index.html.twig', ["panier" => $panierwithData]);
+        $panierwithData = $cartService->getFullCart(); 
+        $total = $cartService->getTotal();
+        return $this->render('cart/index.html.twig', ["panier" => $panierwithData,"total" => $total]);
     }
 
     /**
     * @Route("/panier/add/{id}", name="panier_add")
      */
-    public function panierAction($id,SessionInterface $session){
-        $panier=$session->get('panier',[]);
-        if(!empty($panier[$id])){
-            $panier[$id]++;  
-        }else{
-            $panier[$id] = 1;
-        }
-       
-        $session->set('panier',$panier);  
-        //dd($session->get('panier'));
+    public function panierAction($id,CartService $cartService){
+        $cartService->add($id);  
+        return $this->redirectToRoute('cart_index');
+    }
+
+    /**
+    * @Route("/panier/remove/{id}", name="panier_remove")
+     */
+    public function removeAction($id,CartService $cartService){
+        $cartService->remove($id);  
+
         return $this->redirectToRoute('cart_index');
     }
 }
