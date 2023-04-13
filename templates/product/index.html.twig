@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block search %}
+  {{ form_start(formSearch,{action : path('product_index'), method : 'POST', 'attr' : { 'class': 'd-flex' } }) }}
+  {{ form_end(formSearch) }}
+{% endblock %}
 
 {% block title %}Les produits
 {% endblock %}
