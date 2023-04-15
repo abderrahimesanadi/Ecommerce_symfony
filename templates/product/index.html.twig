@@ -9,22 +9,22 @@
 
 {% block body %}
     <div class="bg-light p-3">
-        <h1>Les produits</h1>
+        <h1>List des produits :  </h1>
     </div>
 
     <div class="row">
         {% for product in products %}
             <div class="col-4 mt-4">
-                <div class="border border-dark rounded p-2 clearfix">
-                    <h2>
+                <div class="border border-success bg-light rounded p-2 clearfix">
+                    <h4 class="m-2">
                         {{ product.title }}
-                        -
-                        {{ product.price }}
-                        €
-                    </h2>
+                        <br/>
+                    <span class="text-white bg-success p-1 rounded align-center" width="50%">{{ product.price }}
+                        € </span>
+                    </h4>
                     <img class="img-fluid rounded" src="images/produit.jpg" alt="Image de {{ product.title }}">
                     <hr>
-                    <a href="{{ path("panier_add" ,{id:product.id}) }}" class="btn btn-success float-right">
+                    <a href="{{ path("panier_add" ,{id : product.id}) }}" class="btn btn-success float-right">
                         <i class="fas fa-shopping-cart mr-1"></i>
                         Ajouter
                     </a>

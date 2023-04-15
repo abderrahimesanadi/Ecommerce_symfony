@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!
+{% block title %}Votre panier
 {% endblock %}
 
 {% block body %}
@@ -33,7 +33,7 @@
             {% endfor %}	
         </tbody>
         <tfooter></tfooter>
-        <td colspan="4" class="text-right text-primary">Total : </td>
+        <td colspan="5" class="text-right text-primary font-weight-bold">Total : </td>
         <td>{{ total }}</td>
     </table>
     {% else %}

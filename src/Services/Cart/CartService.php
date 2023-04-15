@@ -17,13 +17,13 @@ public function __construct(SessionInterface $session,ProductRepository $product
 
 public function add(int $id){
     $panier=$this->session->get('panier',[]);
-    if(!empty($panier[$id])){
-        $panier[$id]++;  
+    if(isset($panier[$id])){
+        $panier[$id]++; 
     }else{
         $panier[$id] = 1;
     }
    
-    $this->session->set('panier',$panier);  
+    $this->session->set('panier',$panier); 
 }
 
 public function remove(int $id){
@@ -38,26 +38,27 @@ public function remove(int $id){
 public function getFullCart() : array{
     $panier=$this->session->get('panier',[]);
     $panierwithData = [];
-    foreach($panier as $p =>$q){
-        if(!is_null($this->productRepository->find($p))){
-            $panierwithData[] = [
-                "pr" => $this->productRepository->find($p),
-                "qantity" => $q
-               ];
+    dump($panier);
+    foreach($panier as $p => $q){
+        $product = $this->productRepository->find($p);
+        if(!is_null($product)){
+            $panierwithData[$p] = [
+                    "pr" => $product,
+                    "qantity" => $q
+            ];
+            
         }
     }
-    $this->session->set('panier',$panierwithData); 
-    
+    //$this->session->set('panier',$panierwithData); 
+
     return $panierwithData;
 }
 
-public function getTotal() : float{
+public function getTotal($panierwithData) : float{
     $total = 0;
-    $panierwithData = $this->getFullCart();
     foreach($panierwithData as $item){
-            $total+=$item["pr"]->getPrice() * $item["qantity"];
+      $total= $total + ($item["pr"]->getPrice() * $item["qantity"]);
     }
-
     return $total;
 }
 }
