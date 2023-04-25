@@ -14,52 +14,55 @@ use App\Form\SearchProductFormType;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/", name="product_index")
+     * @Route("/products", name="products_index")
      */
-    public function index(Request $request,ProductRepository $productRepository,CacheInterface $cache,Stopwatch $stopwatch)
+    public function index(ProductRepository $productRepository, CacheInterface $cache)
     {
-        $stopwatch->start("rep_cache");
-         
-        $formSearch = $this->createForm(SearchProductFormType::class);
-        $formSearch->handleRequest($request);
-        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
-           $searched = $formSearch->get("searched")->getData();   
-           $products = $productRepository->searchProducts($searched);
-           
-        } else {
-            $products = $productRepository->findAll();
-            $cache->get("list_product",function(ItemInterface $item) use ($products){
-                $item->expiresAfter(60);
-                return  $products ;
-             });
-        }
-       
-        $stopwatch->stop("rep_cache");
-        
+        //$stopwatch->start("rep_cache");
+
+        $products = $productRepository->findAll();
+        $cache->get("list_product", function (ItemInterface $item) use ($products) {
+            $item->expiresAfter(60);
+            return  $products;
+        });
+        //$stopwatch->stop("rep_cache");
+
         return $this->render('product/index.html.twig', [
             'products' => $products,
-            'formSearch' => $formSearch->createView()
         ]);
-        
     }
+
 
     /**
      * @Route("/products/search", name="product_search")
      */
-    public function search(Request $request,ProductRepository $productRepository)
+    public function search(Request $request, ProductRepository $productRepository)
     {
         $formSearch = $this->createForm(SearchProductFormType::class);
         $formSearch->handleRequest($request);
-        if ($formSearch->isSubmitted() && $$formSearch->isValid()) {
-
-        $searched = $form->get("searched")->getData();   
-        
-        $products = $productRepository->searchProducts($searched);
-
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $searched = $formSearch->get("searched")->getData();
+            $products = $productRepository->searchProducts($searched);
+        } else {
+            $products = $productRepository->findAll();
+        }
         return $this->render('product/index.html.twig', [
             'products' => $products,
-            'formsearch' => $formSearch->createView()
+            'formSearch' => $formSearch->createView(),
+
         ]);
     }
-   }  
+
+    /**
+     * @Route("/product/{slug}", name="product_show")
+     */
+
+    public function show($slug, Request $request, ProductRepository $productRepository)
+    {
+        $product = $productRepository->findBySlug($slug);
+        dd($product);
+        return $this->render('product/show.html.twig', [
+            'product' => $product
+        ]);
+    }
 }

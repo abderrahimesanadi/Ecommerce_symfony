@@ -21,23 +21,23 @@
         </thead>
         <tbody>
             {% for p in panier %}
-            <tr>
+            <tr id="product_{{p.pr.id}}">
                 <td >{{ p.pr.title }}</td>
                 <td><img height = "30px" width = "30px" src="images/produit.jpg" alt="" class="src"></td>
-                <td>{{ p.pr.price }}</td>
+                <td>{{ p.pr.price }} Dhs</td>
                 <td>{{ p.qantity }}</td>
                 <td>{{ p.qantity * p.pr.price }}</td>
 
-                <td><a href="{{ path("panier_remove" , {id : p.pr.id})}}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+                <td><button type="button" onclick = "removeFromPanier({{p.pr.id}})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
             </tr>
             {% endfor %}	
         </tbody>
         <tfooter></tfooter>
         <td colspan="5" class="text-right text-primary font-weight-bold">Total : </td>
-        <td>{{ total }}</td>
+        <td > <span id="total" class="text-primary font-weight-bold">{{ total }} Dhs</span </td>
     </table>
     {% else %}
     <p>Surprise, c'est vide !</p>
     {% endif %}
-
     {% endblock %}
+

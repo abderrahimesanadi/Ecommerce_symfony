@@ -26,19 +26,19 @@ public function add(int $id){
     $this->session->set('panier',$panier); 
 }
 
-public function remove(int $id){
+public function remove($id){
     $panier=$this->session->get('panier',[]);
     if(!empty($panier[$id])){
         unset($panier[$id]);  
     }
    
     $this->session->set('panier',$panier);
+    $this->getTotal($this->getFullCart());
 }
 
 public function getFullCart() : array{
     $panier=$this->session->get('panier',[]);
     $panierwithData = [];
-    dump($panier);
     foreach($panier as $p => $q){
         $product = $this->productRepository->find($p);
         if(!is_null($product)){
@@ -46,7 +46,6 @@ public function getFullCart() : array{
                     "pr" => $product,
                     "qantity" => $q
             ];
-            
         }
     }
     //$this->session->set('panier',$panierwithData); 

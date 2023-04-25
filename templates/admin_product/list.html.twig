@@ -1,0 +1,57 @@
+{% extends 'admin_connected_base.html.twig' %}
+
+{% block title %}Liste des produits disponibles !
+{% endblock %}
+
+{% block body %}
+	<div class="bg-light p-3">
+		<h3>Liste des produits :
+		</h3>
+		<a class="btn btn-primary mt-2 mb-2 float-right" href="{{ path('product_createOrEdit', { id : 0 })}}">
+			<i class="fas fa-plus fa-solid"></i>Ajouter
+		</a>
+	</div>
+	<div class="container mt-5">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Titre</th>
+					<th scope="col">Image</th>
+					<th scope="col">Prix</th>
+					<th scope="col">Quantité en stock</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+
+				</tr>
+			</thead>
+			<tbody>
+				{% for product in products %}
+					<tr>
+						<td>{{product.title}}</td>
+						<td><img width="20%" height="20%" src="{{ asset( product.image ) }}" alt=" photos du produit "/></td>
+						<td>{{ product.price}}</td>
+						<td>{{product.quantity}}</td>
+						<td>
+							<button class=" btn btn-success">
+								<i class="bi bi-binoculars"></i>
+								Visulaiser
+							</button>
+						</td>
+						<td>
+							<a href="{{ path('product_createOrEdit', { 'id' : product.id } )}}" class=" btn btn-warning">
+								<i class="bi bi-pencil-fill"></i>
+								Modifier
+							</a>
+						</td>
+						<td>
+							<a href="{{ path('product_remove', { 'id' : product.id } )}}" class="btn btn-danger">
+								<i class="bi bi-trash-fill"></i>
+								Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

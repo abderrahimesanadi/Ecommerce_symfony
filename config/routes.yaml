@@ -1,3 +1,34 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+app_logout:
+    path: /logout
+    methods: GET
+    
+app_admin:
+    path:          /admin
+    controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        # the path of the template to render
+        template:  'static/index.html.twig'
+
+app_quoi:
+    path:          /c-est-quoi-essouk-shop
+    controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        # the path of the template to render
+        template:  'static/quoi.html.twig'
+
+app_conditions:
+    path:          /conditions-d-utilisation
+    controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        # the path of the template to render
+        template:  'static/conditions.html.twig'
+
+app_mailling_moteur:
+    path:          /campagne_email_publicitaire
+    controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        # the path of the template to render
+        template:  'static/augmenter-vos-ventes.html.twig'

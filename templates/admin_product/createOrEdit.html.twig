@@ -1,0 +1,36 @@
+{% extends 'admin_connected_base.html.twig' %}
+
+{% block title %}Les produits
+{% endblock %}
+
+{% block body %}
+<div class="container border border-success rounded p-4 ">
+	<div class="bg-light p-3">
+		<h3>
+			{% set pr = app.request.attributes.get('id') %}
+			{% if pr != 0 %}
+				Modifier les caractéristques de votre produit :
+			{% else %}
+				Creer un nouveau produit :
+			{% endif %}
+		</h3>
+	</div>
+
+	{{ form_start(form, {'action' : path('product_createOrEdit',{"id" : pr}), 'method': 'POST', 'attr' : {'class' : 'font-weight-bold'}}) }}
+	{{ form_row(form.title) }}
+	{% if product.image is not null %}
+		{{ form_row(form.image, {'attr' : {'label' : 'Ajouter d\'autre images'} }) }}
+	    {% else %}
+			{{ form_row(form.image) }}
+		{% endif %}	
+			{{ form_row(form.price) }}
+			{{ form_row(form.Category) }}
+			{{ form_row(form.quantity) }}
+			{{ form_row(form.description) }}
+			<button class="btn btn-primary mt-3" type="submit">Enregistrer</button>
+			{{ form_end(form) }}
+			<a href="{{ path('admin_products')}}" class="btn btn-primary mt-2 float-right">
+			<i class="bi bi-arrow-return-left"></i>
+			Retour à la liste des produits</a>
+		</div>
+	{% endblock %}

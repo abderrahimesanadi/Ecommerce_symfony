@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les produits pour la categorie
+{% endblock %}
+
+{% block body %}
+	<div class="bg-light p-3">
+		<h3>List des produits pour la categorie :
+			<span class="text-primary">{{ category.name }}</span>
+		</h3>
+	</div>
+
+	<div class="row">
+		{% for product in products %}
+			<div class="col-4 mt-4">
+				<div class="border border-success bg-light rounded p-2 clearfix">
+					<h4 class="m-2">
+						{{ product.title }}
+						<br/>
+						<span class="text-white bg-success p-1 rounded align-center" width="50%">{{ product.price }}
+							€
+						</span>
+					</h4>
+					<img class="img-fluid rounded" src="{{ asset(product.image) }}" alt="Image de {{ product.title }}">
+					<hr>
+					<a href="{{ path("panier_add" ,{id : product.id}) }}" class="btn btn-success float-right">
+						<i class="fas fa-shopping-cart mr-1"></i>
+						Ajouter
+					</a>
+				</div>
+
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

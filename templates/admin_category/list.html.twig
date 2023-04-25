@@ -1,0 +1,50 @@
+{% extends 'admin_connected_base.html.twig' %}
+
+{% block title %}List des categories !
+{% endblock %}
+
+{% block body %}
+	<div class="bg-light p-3">
+		<h3>List des categories :
+		</h3>
+		<a class="btn btn-primary mt-2 mb-2 float-right" href="{{ path('category_create')}}">
+			<i class="fas fa-plus fa-solid"></i>Ajouter
+		</a>
+	</div>
+	<div class="container mt-5">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Nom</th>
+					<th scope="col">Image</th>
+					<th scope="col">Description</th>
+					<th scope="col">Nombre de produit</th>
+					<th scope="col">r</th>
+					<th scope="col"></th>
+
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+					<tr>
+						<td>{{category.name}}</td>
+						<td><img width="20%" height="20%" src="{{ asset('images/category.jpg') }}" alt=" photo du ce la caetgorie"/>></td>
+						<td>{{ category.description}}</td>
+						<td>{{category.productNumber}}</td>
+						<td>
+							<button class=" btn btn-warning">
+								<i class="fa-solid fa-file-pen"></i>
+								Modifier
+							</button>
+						</td>
+						<td>
+							<button class="btn btn-danger">
+								<i class="fa-solid fa-trash-xmark"></i>
+								Supprimer</button>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

@@ -4,7 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,19 +23,28 @@ class ProductRepository extends ServiceEntityRepository
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
-    
+
     public function searchProducts($value)
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.title like :val')
-            ->setParameter('val', '%'.$value.'%')
+            ->setParameter('val', '%' . $value . '%')
             ->orderBy('p.id', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    
 
+    public function getProductsByCategory($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM product p  WHERE p.category_id = :p_id';
+
+        $stmt = $conn->prepare($sql);
+
+        $resultSet = $stmt->executeQuery(['p_id' => $id]);
+
+        return $resultSet->fetchAllAssociative();
+    }
     /*
     public function findOneBySomeField($value): ?Product
     {
