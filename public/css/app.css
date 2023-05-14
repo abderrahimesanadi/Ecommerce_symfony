@@ -5,7 +5,8 @@
 }
 
 body.user {
-    background-image: url("../images/splash.svg"), linear-gradient(145deg, #375ee3 0%, #6543e0 80%) !important;
+    /* background-image: url("../images/splash.svg"), linear-gradient(145deg, #375ee3 0%, #6543e0 80%) !important;
+   */
 }
 
 .text-black {
@@ -26,8 +27,9 @@ body.user {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-    font-size: 14px;
+    font-size: 18px;
     background: #195D26;
+    font-weight: bold !important
 }
 
 #footer .footer-newsletter {
@@ -115,7 +117,7 @@ body.user {
 }
 
 #footer .footer-top h4 {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     color: #195D26;
     position: relative;

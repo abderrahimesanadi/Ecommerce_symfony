@@ -9,19 +9,27 @@
 		<h3>
 			{% set pr = app.request.attributes.get('id') %}
 			{% if pr != 0 %}
-				Modifier les caractéristques de votre produit :
+				Modifier les caractéristiques de votre produit :
 			{% else %}
 				Creer un nouveau produit :
 			{% endif %}
 		</h3>
+		<a href="{{ path('admin_products')}}" class="btn btn-primary mt-2 float-right">
+			<i class="bi bi-arrow-return-left"></i>
+			Retour à la liste des produits</a>
 	</div>
 
 	{{ form_start(form, {'action' : path('product_createOrEdit',{"id" : pr}), 'method': 'POST', 'attr' : {'class' : 'font-weight-bold'}}) }}
 	{{ form_row(form.title) }}
-	{% if product.image is not null %}
-		{{ form_row(form.image, {'attr' : {'label' : 'Ajouter d\'autre images'} }) }}
-	    {% else %}
-			{{ form_row(form.image) }}
+	{% if images_path is not empty %}
+		{{ form_row(form.images, {'label' : 'Ajouter d\'autre images','attr' : { 'accept' : 'image/*',
+                    'multiple' : 'multiple', 'required' : false, 'class' : 'form-control mb-2'} }) }}
+		  {% for image_path in images_path %}
+		  <img  width = "100" height = "100" src="{{ asset(image_path)}}" alt=" image de {{ image_path}}" class="img-fluid"/>
+	    {% endfor %}
+		{% else %}
+			{{ form_row(form.images,{'label' : 'Images','attr' : { 'accept' : 'image/*',
+                    'multiple' : 'multiple', 'class' : 'form-control mb-2'} }) }}
 		{% endif %}	
 			{{ form_row(form.price) }}
 			{{ form_row(form.Category) }}
@@ -29,8 +37,5 @@
 			{{ form_row(form.description) }}
 			<button class="btn btn-primary mt-3" type="submit">Enregistrer</button>
 			{{ form_end(form) }}
-			<a href="{{ path('admin_products')}}" class="btn btn-primary mt-2 float-right">
-			<i class="bi bi-arrow-return-left"></i>
-			Retour à la liste des produits</a>
 		</div>
 	{% endblock %}

@@ -22,7 +22,7 @@
 	</div>
 	{{ form_row(registrationForm.email, {label: 'Email','attr' : {'class' : 'form-control'}}) }}
 	{{ form_row(registrationForm.plainPassword, {label: 'Mot de pass','attr' : {'class' : 'form-control mb-2'}}) }}
-	<div class="hidden">
+	<div style="display : none">
 		{{form_row(registrationForm.agreeTerms,{label:'Accepterlesconditionsd\'utilisation'}) }}
 	</div>	
 		<div class="form-check">

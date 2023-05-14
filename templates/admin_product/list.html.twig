@@ -29,7 +29,7 @@
 				{% for product in products %}
 					<tr>
 						<td>{{product.title}}</td>
-						<td><img width="20%" height="20%" src="{{ asset( product.image ) }}" alt=" photos du produit "/></td>
+						<td><img width="10%" height="20%" src="{{ asset('images/produit.jpg') }}" alt=" photos du produit {{product.title}}"/></td>
 						<td>{{ product.price}}</td>
 						<td>{{product.quantity}}</td>
 						<td>
@@ -53,5 +53,9 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		<div class="navigation">
+			{{ knp_pagination_render(products) }}
+		</div>
+
 	</div>
 {% endblock %}

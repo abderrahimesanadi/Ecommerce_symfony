@@ -7,12 +7,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ProductType;
 use App\Entity\Product;
+use App\Entity\Image;
+use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use App\Services\ImageService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Require ROLE_ADMIN for *every* controller method in this class.
@@ -25,9 +29,14 @@ class AdminProductController extends AbstractController
     /**
      * @Route("/admin/produits", name="admin_products")
      */
-    public function index(ProductRepository $productRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator, ProductRepository $productRepository): Response
     {
-        $products = $productRepository->findAll();
+        $QueryProducts = $productRepository->findtheLatestProducts();
+        $products = $paginator->paginate(
+            $QueryProducts, /* query NOT result */
+            $request->query->getInt("page", 1), /*page number*/
+            4 /*limit per page*/
+        );
         return $this->render('admin_product/list.html.twig', [
             'products' => $products,
         ]);
@@ -38,10 +47,15 @@ class AdminProductController extends AbstractController
      */
     public function createOrEdit($id, Request $request, EntityManagerInterface $em, ImageService $imageService, ValidatorInterface $validator): Response
     {
+        $images_path = [];
         if ($id == 0) {
             $product = new Product();
         } else {
             $product = $em->getRepository(Product::class)->find($id);
+            $images = $em->getRepository(Image::class)->findBy(['product' => $product->getId()]);
+            foreach ($images as $image) {
+                array_push($images_path, $image->getPath());
+            }
             if (!$product) {
                 throw $this->createNotFoundException(
                     'produit introuvable '
@@ -62,11 +76,21 @@ class AdminProductController extends AbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $image = $form['image']->getData();
-            if ($image) {
-                $newFilename = $imageService->uploadImage($image);
-                $product->setImage('images/' . $newFilename);
+            $images = $form['images']->getData();
+            dump($images);
+            if ($images) {
+                foreach ($images as $img) {
+                    $image = new Image();
+                    $newFilename = $imageService->uploadImage($img);
+                    $image->setPath('images/' . $newFilename);
+                    $image->setProduct($product);
+                    $em->persist($image);
+                }
             }
+            $slugger = new AsciiSlugger();
+            $slug = $slugger->slug($form['title']->getData());
+            $product->setSlug($slug);
+
             $msg = 'Produit crée avec succès!';
             if ($product->getId() != 0) {
                 $msg = 'Produit modifié avec succès!';
@@ -87,17 +111,19 @@ class AdminProductController extends AbstractController
 
         return $this->render('admin_product/createOrEdit.html.twig', [
             'form' => $form->createView(),
-            'product' => $product,
+            'images_path' => $images_path
         ]);
     }
 
     /**
      * @Route("/admin/produit/remove/{id}", name="product_remove")
      */
-    public function remove(Product $product,  EntityManagerInterface $em, Request $request)
+    public function remove(Product $product,  EntityManagerInterface $em)
     {
         // TODO
         $em->remove($product);
+        $products_numbers = $product->getCategory()->getProductNumber();
+        $product->getCategory()->setProductNumber($products_numbers - 1);
         $em->flush();
         return $this->redirectToRoute('admin_products');
     }

@@ -6,13 +6,13 @@
 	{% for product in products %}
 		<div class="col-md-4 mt-4">
 			<div class="border border-success bg-light rounded p-2 clearfix">
-				<h4 class="m-2">
-					{{ product.title }}
+				<h5 class="m-2">
+					{{ product.title | slice(0,17) ~ '...' }}
 					<br/>
 					<span class="text-success p-1 align-center mt-2" width="50%">{{ product.price }}
 						Dhs
 					</span>
-				</h4>
+				</h5>
 				<img class="img-fluid rounded" src="{{ asset(product.image) }}" alt="Image de {{ product.title }}">
 				<hr>
 				<a href="{{ path("panier_add" ,{id : product.id}) }}" class="btn btn-success float-right">
