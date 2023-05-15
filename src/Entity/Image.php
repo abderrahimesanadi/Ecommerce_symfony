@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ImageRepository::class)
@@ -19,14 +20,15 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_product"})
      */
     private $path;
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="images")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $product;
+
 
     public function getId(): ?int
     {

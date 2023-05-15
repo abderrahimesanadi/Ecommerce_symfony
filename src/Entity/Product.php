@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -18,11 +21,13 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list_product"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"list_product"})
      */
     private $price;
 
@@ -43,11 +48,19 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list_product"})
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="product")
+     * @Groups({"list_product"})
+     */
+    private $images;
+
     public function __construct()
     {
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,6 +136,36 @@ class Product
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getProduct() === $this) {
+                $image->setProduct(null);
+            }
+        }
 
         return $this;
     }
