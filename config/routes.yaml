@@ -23,12 +23,19 @@ app_conditions:
     path:          /conditions-d-utilisation
     controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
-        # the path of the template to render
+        # the path of the template to render.html
         template:  'static/conditions.html.twig'
 
 app_mailling_moteur:
-    path:          /campagne_email_publicitaire
+    path:          /augmenter-vos-ventes
     controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
         # the path of the template to render
         template:  'static/augmenter-vos-ventes.html.twig'
+
+app_questions:
+    path:          /questions-frequentes
+    controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        # the path of the template to render
+        template:  'static/questions-frequentes.html.twig'

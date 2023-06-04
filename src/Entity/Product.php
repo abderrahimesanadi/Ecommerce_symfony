@@ -15,34 +15,38 @@ class Product
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
+     * @Groups({"product_details"})
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"list_product"})
+     * @Groups({"list_product","product_details"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="float")
-     * @Groups({"list_product"})
+     * @Groups({"list_product","product_details"})
      */
     private $price;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @Groups({"product_details"})
      */
     private $Category;
 
     /**
      * @ORM\Column(type="integer", options={"default" : 0})
+     * @Groups({"product_details"})
      */
     private $quantity;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"product_details"})
      */
     private $description;
 
@@ -54,7 +58,7 @@ class Product
 
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="product")
-     * @Groups({"list_product"})
+     * @Groups({"list_product","product_details"})
      */
     private $images;
 

@@ -12,7 +12,7 @@ class CartController extends AbstractController
 {
 
     /**
-     * @Route("/panier", name="cart_index")
+     * @Route("api/panier", name="cart_index")
      */
     public function index(CartService $cartService)
     {
@@ -20,20 +20,22 @@ class CartController extends AbstractController
         $panierwithData = $cartService->getFullCart();
         $total = $cartService->getTotal($panierwithData);
 
-        return $this->render('cart/index.html.twig', ["panier" => $panierwithData, "total" => $total]);
+        return $this->json(["panier" => $panierwithData, "total" => $total], 200);
     }
 
     /**
-     * @Route("/panier/add/{id}", name="panier_add")
+     * @Route("api/panier/add/{id}", name="panier_add")
      */
     public function panierAction($id, CartService $cartService)
     {
         $cartService->add($id);
-        return $this->redirectToRoute('cart_index');
+        $panierwithData = $cartService->getFullCart();
+
+        return $this->json($panierwithData, 200);
     }
 
     /**
-     * @Route("/panier/remove/{id}", name="panier_remove", methods={"GET"})
+     * @Route("api/panier/remove/{id}", name="panier_remove", methods={"GET"})
      */
     public function removeAction($id, CartService $cartService, Request $request)
     {
@@ -47,7 +49,7 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/panier/total", name="panier_total", methods={"GET"})
+     * @Route("api/panier/total", name="panier_total", methods={"GET"})
      */
     public function setTotal(CartService $cartService)
     {

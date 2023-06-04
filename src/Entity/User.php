@@ -45,6 +45,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lastName;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $boutique;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $theme;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +164,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getBoutique(): ?string
+    {
+        return $this->boutique;
+    }
+
+    public function setBoutique(?string $boutique): self
+    {
+        $this->boutique = $boutique;
+
+        return $this;
+    }
+
+    public function getTheme(): ?string
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?string $theme): self
+    {
+        $this->theme = $theme;
 
         return $this;
     }

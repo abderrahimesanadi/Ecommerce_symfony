@@ -11,11 +11,12 @@
 			<i class="fas fa-plus fa-solid"></i>Ajouter
 		</a>
 	</div>
-	<div class="container mt-5">
-		<table class="table table-striped">
+	<div class="ml-2 mt-2">
+		<table class="table table-striped" style="color: #1d1e20;">
 			<thead>
 				<tr>
-					<th scope="col">Titre</th>
+					<th scope="col" colspan="3">Titre</th>
+					<th scope="col">Categorie</th>
 					<th scope="col">Image</th>
 					<th scope="col">Prix</th>
 					<th scope="col">Quantité en stock</th>
@@ -28,7 +29,8 @@
 			<tbody>
 				{% for product in products %}
 					<tr>
-						<td>{{product.title}}</td>
+						<td colspan="3">{{product.title}}</td>
+						<td>{{product.category.name}}</td>
 						<td><img width="10%" height="20%" src="{{ asset('images/produit.jpg') }}" alt=" photos du produit {{product.title}}"/></td>
 						<td>{{ product.price}}</td>
 						<td>{{product.quantity}}</td>

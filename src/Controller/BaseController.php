@@ -20,14 +20,15 @@ class BaseController extends AbstractController
 
     public function index(CategoryRepository $rep, ProductRepository $productRepository, Request $request): Response
     {
-        $categories = $rep->findAllAndCount();
+        return $this->redirectToRoute("app_admin");
+        /*$categories = $rep->findAllAndCount();
         $request->getSession()->set("categories", $categories);
         $products = $productRepository->findAll();
         return $this->render('base.html.twig', [
             'categories' => $categories,
             'products' => $products
 
-        ]);
+        ]);*/
     }
 
 

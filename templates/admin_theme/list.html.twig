@@ -1,0 +1,36 @@
+{% extends 'admin_connected_base.html.twig' %}
+
+{% block title %}Liste des templates disponibles !
+{% endblock %}
+
+{% block body %}
+	<div class="bg-light p-3">
+		<h3>Liste des templates disponibles:
+		</h3>
+	</div>
+
+	<div class="row">
+		{% for i,theme in themes %}
+			<div class="col-md-4 mt-4">
+				<div class="border border-success bg-light rounded p-2 clearfix">
+					<h3 class="m-2">
+						template
+						{{i+1}}
+						<br/>
+						<span class="text-success p-1 align-center mt-2" width="50%">Free
+						</span>
+					</h5>
+					<img class="img-fluid rounded" src="{{asset(theme)}}" alt="Image du theme">
+					<hr>
+					<a href="#" class="btn btn-success float-right">
+						<i class="bi bi-vinyl"></i>
+						Selectionner
+					</a>
+				</div>
+
+			</div>
+		{% endfor %}
+
+
+	</div>
+{% endblock %}
