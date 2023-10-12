@@ -34,8 +34,8 @@ class AdminProductController extends AbstractController
         $QueryProducts = $productRepository->findtheLatestProducts();
         $products = $paginator->paginate(
             $QueryProducts, /* query NOT result */
-            $request->query->getInt("page", 1), /*page number*/
-            4 /*limit per page*/
+            $request->query->getInt("page", 1),
+            10
         );
         return $this->render('admin_product/list.html.twig', [
             'products' => $products,
@@ -77,7 +77,6 @@ class AdminProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $images = $form['images']->getData();
-            dump($images);
             if ($images) {
                 foreach ($images as $img) {
                     $image = new Image();

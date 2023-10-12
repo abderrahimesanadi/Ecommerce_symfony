@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\DBAL\MultiDbConnectionWrapper;
 use phpDocumentor\Reflection\Types\Integer;
+use App\Repository\UserRepository;
 
 class ProductController extends AbstractController
 {
@@ -21,6 +22,15 @@ class ProductController extends AbstractController
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
+    }
+
+    /**
+     * @Route("/api/theme/{boutique}", name="get_theme")
+     */
+    public function getTheme($boutique, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->findOneByBoutique($boutique);
+        return new JsonResponse($user->getTheme());
     }
     /**
      *@Route("/api/products", name="app_json") 

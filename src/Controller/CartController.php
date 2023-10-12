@@ -28,8 +28,8 @@ class CartController extends AbstractController
      */
     public function panierAction($id, CartService $cartService)
     {
-        $cartService->add($id);
-        $panierwithData = $cartService->getFullCart();
+        $panier = $cartService->add($id);
+        $panierwithData = $cartService->getFullCart($panier);
 
         return $this->json($panierwithData, 200);
     }
@@ -39,12 +39,7 @@ class CartController extends AbstractController
      */
     public function removeAction($id, CartService $cartService, Request $request)
     {
-        // $id = $request->attributes->get('_route_params')['id'];
-        //$id = $request->request->get('p_id');
         $cartService->remove($id);
-
-        //return $this->json(['message' => 'Produit supprimé avec succes']);
-        //return $this->redirectToRoute('cart_index');
         return new JsonResponse("Produit supprimé avec succes");
     }
 

@@ -42,7 +42,7 @@ class Product
      * @ORM\Column(type="integer", options={"default" : 0})
      * @Groups({"product_details"})
      */
-    private $quantity;
+    private $stock;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -62,9 +62,16 @@ class Product
      */
     private $images;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Panier::class, mappedBy="products")
+     */
+    private $paniers;
+
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->paniers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,14 +115,14 @@ class Product
         return $this;
     }
 
-    public function getQuantity(): ?int
+    public function getStock(): ?int
     {
-        return $this->quantity;
+        return $this->stock;
     }
 
-    public function setQuantity(int $quantity): self
+    public function setStock(int $stock): self
     {
-        $this->quantity = $quantity;
+        $this->stock = $stock;
 
         return $this;
     }
@@ -169,6 +176,33 @@ class Product
             if ($image->getProduct() === $this) {
                 $image->setProduct(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Panier>
+     */
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Panier $panier): self
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers[] = $panier;
+            $panier->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): self
+    {
+        if ($this->paniers->removeElement($panier)) {
+            $panier->removeProduct($this);
         }
 
         return $this;

@@ -31,11 +31,11 @@
 					<tr>
 						<td colspan="3">{{product.title}}</td>
 						<td>{{product.category.name}}</td>
-						<td><img width="10%" height="20%" src="{{ asset('images/produit.jpg') }}" alt=" photos du produit {{product.title}}"/></td>
+						<td><img width="10%" height="20%" src="{{ asset(product.images[0].path) }}" alt=" photos du produit {{product.title}}"/></td>
 						<td>{{ product.price}}</td>
-						<td>{{product.quantity}}</td>
+						<td>{{product.stock}}</td>
 						<td>
-							<button class=" btn btn-success">
+							<button onclick="showProduct('{{product.slug}}')" class=" btn btn-success">
 								<i class="bi bi-binoculars"></i>
 								Visulaiser
 							</button>

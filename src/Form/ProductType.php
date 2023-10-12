@@ -20,7 +20,7 @@ class ProductType extends AbstractType
             ->add('title', TextType::class, ["label" => "Nom du produit", "attr" => ['class' => "form-control mb-2", "placeholder" => "Nom du produit..."]])
             ->add('images', FileType::class, ["mapped" => false, "required" => false, "multiple" => true, "data_class" => null])
             ->add('price', TextType::class, ["label" => "Prix en DHs : ", "attr" => ['class' => "form-control mb-2 mt-2"]])
-            ->add('quantity', TextType::class, ["label" => "Quantité en stock : ", "attr" => ['class' => "form-control mb-2 mt-2"]])
+            ->add('stock', TextType::class, ["label" => "Quantité en stock : ", "attr" => ['class' => "form-control mb-2 mt-2"]])
             ->add('description', CKEditorType::class, ["label" => "Description et caracteristiques : "])
             ->add('Category', EntityType::class, ['class' => Category::class, 'choice_label' => 'name', "label" => "Categorie : ", "attr" => ['class' => "form-control"]]);
     }

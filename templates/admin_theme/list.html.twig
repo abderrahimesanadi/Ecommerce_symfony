@@ -8,24 +8,25 @@
 		<h3>Liste des templates disponibles:
 		</h3>
 	</div>
-
+	{% set i = 0 %}
 	<div class="row">
-		{% for i,theme in themes %}
+		{% for css,img in themes %}
+			{% set i = i+1 %}
 			<div class="col-md-4 mt-4">
 				<div class="border border-success bg-light rounded p-2 clearfix">
 					<h3 class="m-2">
 						template
-						{{i+1}}
+						{{i}}
 						<br/>
 						<span class="text-success p-1 align-center mt-2" width="50%">Free
 						</span>
 					</h5>
-					<img class="img-fluid rounded" src="{{asset(theme)}}" alt="Image du theme">
+					<img class="img-fluid rounded" src="{{asset(img)}}" alt="Image du theme">
 					<hr>
-					<a href="#" class="btn btn-success float-right">
+					<button onclick="changeTheme('{{css}}')" class="btn btn-success float-right">
 						<i class="bi bi-vinyl"></i>
 						Selectionner
-					</a>
+					</button>
 				</div>
 
 			</div>
