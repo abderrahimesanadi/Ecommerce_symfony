@@ -35,7 +35,7 @@ class AdminThemeController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator, ProductRepository $productRepository): Response
     {
-        $themes = [
+        $themes_arr = [
             "cerulean" => "themes/cerulean.jpg", "cosmo" => "themes/cosmo.jpg",
             "cyborg" => "themes/cyborg.jpg", "darkly" => "themes/darkly.jpg",
             "flaty" => "themes/flaty.jpg", "journal" => "themes/journal.jpg", "literia" => "themes/literia.jpg",
@@ -44,8 +44,12 @@ class AdminThemeController extends AbstractController
             "murph" => "themes/murph.jpg", "pulse" => "themes/pulse.jpg",
             "quartz" => "themes/quartz.jpg", "sandstone" => "themes/sandstone.jpg"
 
-
         ];
+        $themes = $paginator->paginate(
+            $themes_arr,
+            $request->query->getInt("page", 1),
+            9
+        );
         return $this->render('admin_theme/list.html.twig', [
             "themes" => $themes
         ]);

@@ -55,6 +55,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public $theme;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isAdmin;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,6 +198,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTheme(?string $theme): self
     {
         $this->theme = $theme;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function isIsAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(?bool $isAdmin): self
+    {
+        $this->isAdmin = $isAdmin;
 
         return $this;
     }

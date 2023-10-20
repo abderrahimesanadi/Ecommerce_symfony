@@ -8,8 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ProductType;
 use App\Entity\Product;
 use App\Entity\Image;
-use App\Repository\CategoryRepository;
-use App\Repository\ProductRepository;
+use App\Repository\OrderRepository;
 use App\Services\ImageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -24,21 +23,21 @@ use Knp\Component\Pager\PaginatorInterface;
  * @IsGranted("ROLE_ADMIN")
  */
 
-class AdminProductController extends AbstractController
+class AdminOrderController extends AbstractController
 {
     /**
-     * @Route("/admin/produits", name="admin_products")
+     * @Route("/admin/orders", name="admin_orders")
      */
-    public function index(Request $request, PaginatorInterface $paginator, ProductRepository $productRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator, OrderRepository $orderRepository): Response
     {
-        $QueryProducts = $productRepository->findtheLatestProducts();
-        $products = $paginator->paginate(
+        $QueryProducts = $orderRepository->findtheLatestOrders();
+        $orders = $paginator->paginate(
             $QueryProducts, /* query NOT result */
             $request->query->getInt("page", 1),
-            9
+            10
         );
-        return $this->render('admin_product/list.html.twig', [
-            'products' => $products,
+        return $this->render('admin_order/list.html.twig', [
+            'orders' => $orders,
         ]);
     }
 

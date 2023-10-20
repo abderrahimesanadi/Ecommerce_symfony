@@ -45,7 +45,7 @@ class ApiLoginController extends AbstractController
         $user->setEmail($jsonuser->email);
         $user->setPassword($userPasswordEncoder->encodePassword($user, $jsonuser->password));
         $token = bin2hex(random_bytes(16));
-
+        $user->setToken($token);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();

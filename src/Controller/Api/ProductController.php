@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\DBAL\MultiDbConnectionWrapper;
 use phpDocumentor\Reflection\Types\Integer;
 use App\Repository\UserRepository;
+use App\Entity\Order;
 
 class ProductController extends AbstractController
 {
@@ -64,5 +65,25 @@ class ProductController extends AbstractController
     {
         $products = $repo->findAll();
         return $this->json($products, 200, [], ["groups" => "list_category"]);
+    }
+
+    /**
+     *@Route("/api/order/save", name="app_order_save") 
+     */
+
+    public function saveOrder(Request $request, ProductRepository $prRepo, UserRepository $usrRepo): Response
+    {
+        $jsonOrder = json_decode($request->getContent());
+        //dd($jsonOrder);
+        $product = $prRepo->find($jsonOrder->idProduct);
+        $user =  $usrRepo->findOneByToken($jsonOrder->token);
+        $order = new Order();
+        $order->setProduct($product);
+        $order->setUser($user);
+        $order->setAdresse($jsonOrder->adresse);
+        $order->setTotal($product->getPrice());
+        $this->em->persist($order);
+        $this->em->flush();
+        return $this->json(["order" => $order->getId()], 200, []);
     }
 }
