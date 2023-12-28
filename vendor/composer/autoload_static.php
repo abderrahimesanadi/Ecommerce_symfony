@@ -4,22 +4,22 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit649e7b99df68a17b3fa7a27f8ec10be9
+class ComposerStaticInitf8aabd658152a61f423d2dad69adc90f
 {
     public static $files = array (
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
-        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         'c2aad8997a98dfc4771bdbffea3d62b7' => __DIR__ . '/..' . '/laminas/laminas-code/polyfill/ReflectionEnumPolyfill.php',
+        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -554,14 +554,22 @@ class ComposerStaticInit649e7b99df68a17b3fa7a27f8ec10be9
 
     public static $classMap = array (
         'App\\Controller\\Admin\\AdminCategoryController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminCategoryController.php',
+        'App\\Controller\\Admin\\AdminOrderController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminOrderController.php',
         'App\\Controller\\Admin\\AdminProductController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminProductController.php',
+        'App\\Controller\\Admin\\AdminThemeController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminThemeController.php',
+        'App\\Controller\\Admin\\AdminUserController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminUserController.php',
+        'App\\Controller\\ApiLoginController' => __DIR__ . '/../..' . '/src/Controller/ApiLoginController.php',
+        'App\\Controller\\Api\\ProductController' => __DIR__ . '/../..' . '/src/Controller/Api/ProductController.php',
         'App\\Controller\\BaseController' => __DIR__ . '/../..' . '/src/Controller/BaseController.php',
         'App\\Controller\\CartController' => __DIR__ . '/../..' . '/src/Controller/CartController.php',
         'App\\Controller\\CategoryController' => __DIR__ . '/../..' . '/src/Controller/CategoryController.php',
         'App\\Controller\\ProductController' => __DIR__ . '/../..' . '/src/Controller/ProductController.php',
         'App\\Controller\\Security\\SecurityController' => __DIR__ . '/../..' . '/src/Controller/Security/SecurityController.php',
+        'App\\DBAL\\MultiDbConnectionWrapper' => __DIR__ . '/../..' . '/src/DBAL/MultiDbConnectionWrapper.php',
         'App\\Entity\\Category' => __DIR__ . '/../..' . '/src/Entity/Category.php',
         'App\\Entity\\Image' => __DIR__ . '/../..' . '/src/Entity/Image.php',
+        'App\\Entity\\Order' => __DIR__ . '/../..' . '/src/Entity/Order.php',
+        'App\\Entity\\Panier' => __DIR__ . '/../..' . '/src/Entity/Panier.php',
         'App\\Entity\\Product' => __DIR__ . '/../..' . '/src/Entity/Product.php',
         'App\\Entity\\User' => __DIR__ . '/../..' . '/src/Entity/User.php',
         'App\\EventSubscriber\\RequestSubscriber' => __DIR__ . '/../..' . '/src/EventSubscriber/RequestSubscriber.php',
@@ -572,6 +580,8 @@ class ComposerStaticInit649e7b99df68a17b3fa7a27f8ec10be9
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
         'App\\Repository\\CategoryRepository' => __DIR__ . '/../..' . '/src/Repository/CategoryRepository.php',
         'App\\Repository\\ImageRepository' => __DIR__ . '/../..' . '/src/Repository/ImageRepository.php',
+        'App\\Repository\\OrderRepository' => __DIR__ . '/../..' . '/src/Repository/OrderRepository.php',
+        'App\\Repository\\PanierRepository' => __DIR__ . '/../..' . '/src/Repository/PanierRepository.php',
         'App\\Repository\\ProductRepository' => __DIR__ . '/../..' . '/src/Repository/ProductRepository.php',
         'App\\Repository\\UserRepository' => __DIR__ . '/../..' . '/src/Repository/UserRepository.php',
         'App\\Services\\Cart\\CartService' => __DIR__ . '/../..' . '/src/Services/Cart/CartService.php',
@@ -5491,9 +5501,9 @@ class ComposerStaticInit649e7b99df68a17b3fa7a27f8ec10be9
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit649e7b99df68a17b3fa7a27f8ec10be9::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit649e7b99df68a17b3fa7a27f8ec10be9::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit649e7b99df68a17b3fa7a27f8ec10be9::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf8aabd658152a61f423d2dad69adc90f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf8aabd658152a61f423d2dad69adc90f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf8aabd658152a61f423d2dad69adc90f::$classMap;
 
         }, null, ClassLoader::class);
     }

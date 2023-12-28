@@ -11,7 +11,7 @@
 		{% block stylesheets %}
 
 			<link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+			<link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -38,11 +38,7 @@
 						<a class="nav-link" href="{{ path('products_index') }}">Produits
 						</a>
 					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="{{ path('cart_index') }}">
-							<i class="bi bi-cart-fill"></i>
-							Panier</a>
-					</li>
+					
 				</ul>
 				<ul class="navbar-nav mr-auto ">
 					<li class="nav-item ">
@@ -51,31 +47,35 @@
 				</ul>
 				<ul class="navbar-nav mr-auto ">
 					<li class="nav-item ">
-						<a class="btn btn-outline-success bg-white ml-2 rounded text-dark" href="{{ path('app_login') }}">
+						<a class="btn btn-outline-success bg-white ml-2 rounded text-dark" href="{{ path('app_login_custmer') }}">
 							<i class="bi bi-person-check-fill"></i>
-
 							Connexion</a>
 					</li>
 					<li class="nav-item ">
-						<a href="{{ path('app_register')}}" class="btn btn-outline-success bg-white ml-2 rounded text-dark">
+						<a href="{{ path('app_register_custmer')}}" class="btn btn-outline-success bg-white ml-2 rounded text-dark">
 							<i class="bi bi-person-fill-add"></i>
 							Inscription</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="{{ path('cart_index') }}">
+							<i class="bi bi-cart-fill"></i>
+							Panier</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
-		<div class="container pt-3">
+		<div class="container-fluid pt-3">
 			{% for message in app.flashes('notice') %}
 				<div class="flash-notice">
 					{{ message }}
 				</div>
 			{% endfor %}
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-4">
 					{{ include('sidebar.html.twig', {'categories' : app.session.get('categories') }) }}
 				</ul>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-8">
 				{% block body %}
 					{{ include('product/list.html.twig', {'products' : products}) }}
 				{% endblock %}

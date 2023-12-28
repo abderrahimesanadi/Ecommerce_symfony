@@ -39,7 +39,7 @@ class Category
     private $products;
 
     /**
-     * @ORM\Column(type="integer", options={"default" : 0}))
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0}))
      * @Groups({"list_category"})
      */
     private $productNumber;

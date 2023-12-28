@@ -3,7 +3,7 @@
 		<div class="container-fluid bg-light">
 			<a class="navbar-brand text-dark" href="{{ path('category_products',{'id' : category.id }) }}">{{ category.name }}</a>
 			<span class="badge bg-danger rounded-pill text-white">
-				{{ category.product_number }}
+				{{ category.product_number == '' ? 0 : category.product_number }}
 			</span>
 		</div>
 	</nav>

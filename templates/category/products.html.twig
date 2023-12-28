@@ -21,7 +21,7 @@
 							€
 						</span>
 					</h4>
-					<img class="img-fluid rounded" src="{{ asset(product.image) }}" alt="Image de {{ product.title }}">
+					<img class="img-fluid rounded" src="{{ asset(product.images[0].path) }}" alt="Image de {{ product.title }}">
 					<hr>
 					<a href="{{ path("panier_add" ,{id : product.id}) }}" class="btn btn-success float-right">
 						<i class="fas fa-shopping-cart mr-1"></i>

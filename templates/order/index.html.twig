@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les categories
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="bg-light p-3">
+			<h2>Creer une nouvelle categorie :
+			</h2>
+		</div>
+
+		{{ form_start(form, {'action' : path('order_create'), 'method': 'POST'}) }}
+		{{ form_row(form.name) }}
+		{{ form_row(form.description) }}
+		<button class="btn btn-primary mt-3" type="submit">Enregistrer</button>
+		{{ form_end(form) }}
+
+		<a href="{{ path('admin_categories')}}" class="btn btn-primary mt-3 float-right">Retour</a>
+	</div>
+{% endblock %}

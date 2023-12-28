@@ -28,16 +28,24 @@
                 <td>{{ p.qantity }}</td>
                 <td>{{ p.qantity * p.pr.price }}</td>
 
-                <td><button type="button" onclick = "removeFromPanier({{p.pr.id}})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                <td><button type="button" onclick = "removeFromPanier({{p.pr.id}})" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></td>
             </tr>
             {% endfor %}	
         </tbody>
         <tfooter></tfooter>
+        <tr>
         <td colspan="5" class="text-right text-primary font-weight-bold">Total : </td>
         <td > <span id="total" class="text-primary font-weight-bold">{{ total }} Dhs</span </td>
+        </tr>
+        <tr>
+                <td colspan="2"> </td>
+                <td colspan="2"> <a class="btn btn-primary" href="{{ path('products_index') }}"><i class="bi bi-bag-plus-fill"></i><span class="pl-2">Ajouter d'autre produit</span></a></td>
+                <td colspan="2"> <button href="{{ path('app_order') }}" class="btn btn-info"><i class="bi bi-receipt"></i><span class="pl-2">Commander</span></button></td>
+            </tr>
+
     </table>
     {% else %}
-    <p>Surprise, c'est vide !</p>
+    <p>Vous n'avez pas encore ajouté des produits au panier !</p>
     {% endif %}
     {% endblock %}
 
