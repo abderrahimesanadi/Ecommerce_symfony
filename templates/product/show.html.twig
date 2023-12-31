@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Caractéristique du produit
+{% endblock %}
+
+{% block body %}
+<div *ngIf="product" class="productdetail">
+<div class="row">
+<div class="col-md-6">
+<img src="{{ asset(product.images[0].path)}}"/>
+</div>
+<div class="col-md-6">
+	<h2>{{product.title}}</h2>
+	<h2 class="text-success p-1 align-center mt-2" >{{ product.price }}
+		Dhs
+	</h2>
+   <div class="my-rating"></div>
+
+	<a href="{{ path("panier_add" ,{id : product.id}) }}"  class="btn btn-success float-right">
+		<i class="bi bi-cart-fill"></i>
+		Ajouter au panier
+	</a>
+</div>
+</div>
+<div class="row mt-5">
+	<div class="card text-black mb-3" style="color:#000!important">
+		<div class="card-header">Détails et caractéristiques</div>
+		<div class="card-body">
+		  <h4 class="card-title">Description : </h4>
+		  <p class="card-text">{{product.description | markdown_to_html | sanitize_html}}.</p>
+		</div>
+	  </div>
+	  
+	
+</div>
+</div>{% endblock %}
+{% block javascripts %}
+	<script type="text/javascript" src="{{asset('js/jquery.star-rating-svg.js')}}"></script>
+	<script type="text/javascript" src="{{asset('css/jquery.star-rating-svg.css')}}"></script>
+	<script type="text/javascript">
+	    $('.my-rating').starRating({starIconEmpty:'far fa-star',starIconFull:'fas fa-star',starColorEmpty:'lightgray',starColorFull:'yellow',starsSize: 4, stars: 5,});
+	</script>
+
+{% endblock %}

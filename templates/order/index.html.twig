@@ -6,16 +6,44 @@
 {% block body %}
 	<div class="container">
 		<div class="bg-light p-3">
-			<h2>Creer une nouvelle categorie :
-			</h2>
+			<h3 class="text-primary">Récapilatif de votre commande :
+			</h3>
+			<table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Titre</td>
+                <td>image</td>
+                <td>prix</td>
+                <td>Quantité</td>
+                <td>Total</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in panier %}
+            <tr id="product_{{p.pr.id}}">
+                <td >{{ p.pr.title }}</td>
+                <td><img height = "30px" width = "30px" src="{{ asset(p.pr.images[0].path)}}" alt="" class="src"></td>
+                <td>{{ p.pr.price }} Dhs</td>
+                <td>{{ p.qantity }}</td>
+                <td>{{ p.qantity * p.pr.price }}</td>
+
+            </tr>
+            {% endfor %}	
+        </tbody>
+        <tfooter></tfooter>
+        <tr>
+        <td colspan="4" class="text-right text-primary font-weight-bold">Total : </td>
+        <td > <span id="total" class="text-primary font-weight-bold">{{ total }} Dhs</span </td>
+        </tr>
+		</table>
 		</div>
 
 		{{ form_start(form, {'action' : path('order_create'), 'method': 'POST'}) }}
-		{{ form_row(form.name) }}
-		{{ form_row(form.description) }}
-		<button class="btn btn-primary mt-3" type="submit">Enregistrer</button>
+		{{ form_row(form.adresse) }}
+		<button class="btn btn-warning mt-3" type="submit">Valider et passer au paiment</button>
 		{{ form_end(form) }}
 
-		<a href="{{ path('admin_categories')}}" class="btn btn-primary mt-3 float-right">Retour</a>
+		<a href="{{ path('cart_index')}}" class="btn btn-primary mt-3 float-right">Retour</a>
 	</div>
 {% endblock %}

@@ -25,6 +25,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=180, nullable=true)
+     */
+    private $phone;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -81,6 +86,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
 
     /**
      * A visual identifier that represents this user.

@@ -59,8 +59,7 @@ class ProductController extends AbstractController
 
     public function show($slug, Request $request, ProductRepository $productRepository)
     {
-        $product = $productRepository->findBySlug($slug);
-        dd($product);
+        $product = $productRepository->findOneBySlug($slug);
         return $this->render('product/show.html.twig', [
             'product' => $product
         ]);

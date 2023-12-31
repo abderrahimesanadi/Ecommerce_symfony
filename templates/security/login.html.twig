@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_sec.html.twig' %}
 {% block title %}Identifiez-vous pour accèder à votre  boutique en ligne
 {% endblock %}
 
@@ -20,7 +20,7 @@
 
 			<label for="password">Mot de pass:</label>
 			<input type="password" id="password" name="_password" class="form-control" placeholder="Mot de pass"/>
-
+			<input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
 
 			<button type="submit" class="btn btn-success-p mt-3">Connexion</button>
 

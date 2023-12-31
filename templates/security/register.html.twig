@@ -1,12 +1,12 @@
-{% extends 'base.html.twig' %}
-{% block title %}Inscrivez-vous pour créer votre  boutique en ligne
+{% extends 'base_sec.html.twig' %}
+{% block title %}Inscrivez-vous pour acheter des produits en ligne
 {% endblock %}
 
 {% block body %}
 
 <div class="container mt-5 border border-success bg-light rounded p-2 clearfix" id="register">
 	<div class="bg-light p-3">
-		<h3 class="text-center">Inscrivez-vous pour créer votre  boutique en ligne
+		<h3 class="text-center">Inscrivez-vous pour acheter des produits en ligne
 		</h3>
 	</div>
 	{{ form_start(registrationForm) }}
@@ -21,9 +21,10 @@
 		</div>
 	</div>
 	{{ form_row(registrationForm.email, {label: 'Email','attr' : {'class' : 'form-control'}}) }}
+	{{ form_row(registrationForm.phone, {label: 'Téléphone','attr' : {'class' : 'form-control'}}) }}
 	{{ form_row(registrationForm.plainPassword, {label: 'Mot de pass','attr' : {'class' : 'form-control mb-2'}}) }}
 	<div>
-		{{form_row(registrationForm.agreeTerms,{label:'Accepterlesconditionsd\'utilisation'}) }}
+		{{form_row(registrationForm.agreeTerms,{label:'Accepter les conditions d\'utilisation'}) }}
 	</div>	
 	<!--
 		<div class="form-check">

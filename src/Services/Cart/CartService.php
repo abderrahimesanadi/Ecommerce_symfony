@@ -60,4 +60,6 @@ public function getTotal($panierwithData) : float{
     }
     return $total;
 }
+
+
 }

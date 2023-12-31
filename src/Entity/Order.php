@@ -19,10 +19,10 @@ class Order
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Product::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Panier::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $product;
+    private $panier;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
@@ -35,24 +35,20 @@ class Order
      */
     private $adresse;
 
-    /**
-     * @ORM\Column(type="decimal", precision=2, scale=0)
-     */
-    private $total;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getProduct(): ?Product
+    public function getPanier(): ?Panier
     {
-        return $this->product;
+        return $this->panier;
     }
 
-    public function setProduct(Product $product): self
+    public function setPanier(Panier $panier): self
     {
-        $this->product = $product;
+        $this->panier = $panier;
 
         return $this;
     }
@@ -81,15 +77,4 @@ class Order
         return $this;
     }
 
-    public function getTotal(): ?string
-    {
-        return $this->total;
-    }
-
-    public function setTotal(string $total): self
-    {
-        $this->total = $total;
-
-        return $this;
-    }
 }

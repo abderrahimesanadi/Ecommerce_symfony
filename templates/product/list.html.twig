@@ -2,10 +2,10 @@
 	<h3>Liste des produits disponibles:
 	</h3>
 </div>
-
 <div class="row">
 	{% for product in products %}
 		<div class="col-md-4 mt-4">
+		<a href="{{ path("product_show",{slug : product.slug})}}">
 			<div class="border border-success bg-light rounded p-2 clearfix">
 				<h5 class="m-2">
 					{{ product.title | slice(0,17) ~ '...' }}
@@ -21,7 +21,7 @@
 					Ajouter
 				</a>
 			</div>
-
+          </a>
 		</div>
 	{% endfor %}
 
