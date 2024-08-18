@@ -1,5 +1,6 @@
 # Installation
-1. Clonez le dépot chez vous puis Lancez la commande : `composer install`
+1. Clonez le dépot chez vous (git clone https://gitlab.com/abderrahime.sanadi/panier_symfony5.git panier_symfony5
+) puis Lancez la commande : `composer install`
 2. Lancez la migration : `php bin/console d:s:u --force` apres avoir créé une base de donnée mysql nommée : boutique (penser à parametrer les acces mysql dans le fichier .env)
 3. lancer la commande : php -S localhost:8000 -t public pour démarer le serveur web
 
