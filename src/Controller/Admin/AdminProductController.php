@@ -21,7 +21,7 @@ use Knp\Component\Pager\PaginatorInterface;
 /**
  * Require ROLE_ADMIN for *every* controller method in this class.
  *
- * @IsGranted("ROLE_ADMIN")
+ * @IsGranted("ROLE_USER")
  */
 
 class AdminProductController extends AbstractController
