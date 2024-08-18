@@ -22,16 +22,7 @@
 	</div>
 	{{ form_row(registrationForm.email, {label: 'Email','attr' : {'class' : 'form-control'}}) }}
 	{{ form_row(registrationForm.plainPassword, {label: 'Mot de pass','attr' : {'class' : 'form-control mb-2'}}) }}
-	<div style="display : none">
-		{{form_row(registrationForm.agreeTerms,{label:'Accepterlesconditionsd\'utilisation'}) }}
-	</div>	
-		<div class="form-check">
-			<input class="form-check-input" name="registration_form[agreeTerms]" type="checkbox" value="" id="registration_form_agreeTerms" required="required">
-			<label class="form-check-label" for="registration_form_agreeTerms">J' accept les
-				<a href="/conditions-d-utilisation">terms et conditions d\'utilisation</a>
-			</label>
-			<div class="invalid-feedback">You must agree before submitting.</div>
-		</div>
+
 		<button type="submit"class="btn btn-success-p mt-2">Inscrivez-vous</button>
 		{{ form_end(registrationForm) }}
 		<div class="text-primary mt-2">
