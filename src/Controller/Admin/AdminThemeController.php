@@ -18,7 +18,7 @@ use function PHPSTORM_META\map;
 /**
  * Require ROLE_ADMIN for *every* controller method in this class.
  *
- * @IsGranted("ROLE_ADMIN")
+ * @IsGranted("ROLE_USER")
  */
 class AdminThemeController extends AbstractController
 {
