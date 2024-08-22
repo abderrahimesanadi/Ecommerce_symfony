@@ -1,11 +1,14 @@
 # Installation
-1. Clonez le dépot chez vous (git clone https://gitlab.com/abderrahime.sanadi/panier_symfony5.git panier_symfony5
-) puis Lancez la commande : `composer install` (dans le repertoire du projet)
-2. Lancez la migration : `php bin/console d:s:u --force` apres avoir créé une base de donnée mysql nommée : boutique (penser à parametrer les acces mysql dans le fichier .env (ligne DATABASE_URL))
-3. lancer la commande : php -S localhost:8000 -t public pour démarer le serveur web
 
-4. essayer d'acceder à l'url http://localhost:8000/admin/inscription pour créer un compte
-5. essayer de se connecter pour parametrer votre boutique
+Clone the repository then Run the command: composer install (in the project directory)
 
-N.B : il y a un autre projet avec Angular qui consomme la partie API de ce projet 
+Start the migration: php bin/console d:s:u --force after having created a mysql database named: shop (remember to configure mysql access in the .env file (DATABASE_URL line))
+
+run the command: php -S localhost:8000 -t public to start the web server
+
+try to access the url http://localhost:8000/admin/registration to create an account
+
+try to log in to configure your store
+
+N.B: there is another project with Angular which consumes the API part of this project
 
