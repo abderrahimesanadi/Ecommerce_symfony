@@ -7,5 +7,5 @@
 4. essayer d'acceder à l'url http://localhost:8000/admin/inscription pour créer un compte
 5. essayer de se connecter pour parametrer votre boutique
 
-N.B : il y a un autre projet avec Angular(privé) qui consomme la partie API de ce projet 
+N.B : il y a un autre projet avec Angular qui consomme la partie API de ce projet 
 
